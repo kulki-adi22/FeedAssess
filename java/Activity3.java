@@ -1,5 +1,6 @@
 package com.example.mad_app1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,7 +12,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +32,20 @@ public class Activity3 extends AppCompatActivity {
     Button btn1, btn2;
     Spinner spn;
     String sub;
-
+//    FirebaseDatabase firebaseDatabase;
+//    DatabaseReference databaseReference;
+    FirebaseFirestore db;
+    DBOps qset;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
         spn = (Spinner) findViewById(R.id.sub_list);
         ques1 = (EditText) findViewById(R.id.ques1);
-//        ques2= (EditText) findViewById(R.id.ques2);
-//        ques3= (EditText) findViewById(R.id.ques3);
-//        ques4= (EditText) findViewById(R.id.ques4);
-//        ques5= (EditText) findViewById(R.id.ques5);
-
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        databaseReference = firebaseDatabase.getReference();
+        qset = new DBOps();
+        db = FirebaseFirestore.getInstance();
         List<String> sub_list = new ArrayList<String>();
         sub_list.add(0, "Choose a subject");
         sub_list.add("Computer Networks-1");
@@ -81,6 +94,7 @@ public class Activity3 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please choose a subject", Toast.LENGTH_SHORT).show();
             }
         });
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,13 +102,60 @@ public class Activity3 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please choose a subject", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getApplicationContext(), "Question is: "+ques1.getText().toString(), Toast.LENGTH_SHORT).show();
                 //obj.add(q);
-                Toast.makeText(getApplicationContext(), "Subject: " + sub, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Q1: " + quesList.get(0), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Q2: " + quesList.get(1), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Q3: " + quesList.get(2), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Q4: " + quesList.get(3), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Q5: " + quesList.get(4), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Subject: " + sub, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Q1: " + quesList.get(0), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Q2: " + quesList.get(1), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Q3: " + quesList.get(2), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Q4: " + quesList.get(3), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Q5: " + quesList.get(4), Toast.LENGTH_SHORT).show();
+                //addDataToFirebase(sub,quesList);
+                addDataToFirestore(sub,quesList);
             }
         });
     }
+
+    private void addDataToFirestore(String subject, List<String> questionList)
+    {
+        qset.setSubject(subject);
+        qset.setQ1(questionList.get(0).toString());
+        qset.setQ2(questionList.get(1).toString());
+        qset.setQ3(questionList.get(2).toString());
+        qset.setQ4(questionList.get(3).toString());
+        qset.setQ5(questionList.get(4).toString());
+        CollectionReference questions = db.collection("Questions");
+        questions.add(qset).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getApplicationContext(),"Added to firestore",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Failed to add",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+//    private void addDataToFirebase(String subject, List questionList)
+//    {
+//        qset.setSubject(subject);
+//        qset.setQ1(questionList.get(0).toString());
+//        qset.setQ2(questionList.get(1).toString());
+//        qset.setQ3(questionList.get(2).toString());
+//        qset.setQ4(questionList.get(3).toString());
+//        qset.setQ5(questionList.get(4).toString());
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //databaseReference.setValue(qset);
+//                databaseReference.setValue(qset);
+//                Toast.makeText(getApplicationContext(),"Data added",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(getApplicationContext(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }
