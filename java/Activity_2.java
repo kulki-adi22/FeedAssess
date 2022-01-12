@@ -112,7 +112,6 @@ public class Activity2 extends AppCompatActivity {
                     }
                 });
 
-                qList.setVisibility(View.VISIBLE);
             }
         });
 
@@ -124,7 +123,7 @@ public class Activity2 extends AppCompatActivity {
         q3.setText(qu3);
         q4.setText(qu4);
         q5.setText(qu5);
-
+        qList.setVisibility(View.VISIBLE);
     }
-    
+
 }
