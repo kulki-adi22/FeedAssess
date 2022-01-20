@@ -1,8 +1,11 @@
 package com.example.mad_app1;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,30 +13,31 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Activity3 extends AppCompatActivity {
-    EditText ques1, ques2, ques3, ques4, ques5;
-    Button btn1, btn2;
+    EditText ques1, newPwd;
+    Button btn1, btn2,resBtn;
     Spinner spn;
     String sub;
-    FirebaseFirestore db;
+    FirebaseFirestore db,db2;
     DBOps qset;
+    TextView tv;
+    ArrayList<Responses> responsesArrayList;
+    MyAdapter myAdapter;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,16 @@ public class Activity3 extends AppCompatActivity {
         ques1 = (EditText) findViewById(R.id.ques1);
         qset = new DBOps();
         db = FirebaseFirestore.getInstance();
+        db2 = FirebaseFirestore.getInstance();
+        newPwd = findViewById(R.id.pwdText);
+        resBtn = findViewById(R.id.prevResBtn);
+//        pwdBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                tv.setVisibility(View.VISIBLE);
+//                newPwd.setVisibility(View.VISIBLE);
+//            }
+//        });
         List<String> sub_list = new ArrayList<String>();
         sub_list.add(0, "Choose a subject");
         sub_list.add("Computer Networks-1");
@@ -64,6 +78,19 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+//        recyclerView = findViewById(R.id.recyclerView);
+//        responsesArrayList = new ArrayList<Responses>();
+//        myAdapter = new MyAdapter(Activity3.this,responsesArrayList);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        resBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity3.this,DisplayResponseNew.class);
+                startActivity(intent);
+//                displayResponses();
             }
         });
         List<String> quesList = new ArrayList<String>();
@@ -100,6 +127,21 @@ public class Activity3 extends AppCompatActivity {
         });
     }
 
+    private void displayResponses() {
+        db2.collection("Responses")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for (DocumentChange dc : value.getDocumentChanges()){
+                            if(dc.getType()==DocumentChange.Type.ADDED){
+                                responsesArrayList.add(dc.getDocument().toObject(Responses.class));
+                            }
+                                myAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
     private void addDataToFirestore(String subject, List<String> questionList)
     {
 //        qset.setSubject(subject);
@@ -115,16 +157,5 @@ public class Activity3 extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Added to firestore",Toast.LENGTH_SHORT).show();
             }
         });
-//        questions.add(qset).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                Toast.makeText(getApplicationContext(),"Added to firestore",Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getApplicationContext(),"Failed to add",Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 }
