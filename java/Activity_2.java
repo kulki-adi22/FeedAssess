@@ -195,6 +195,7 @@ public class Activity2 extends AppCompatActivity {
         responses.setRes4(resList.get(3));
         responses.setRes5(resList.get(4));
         responses.setSubject(selectedSubject);
+        responses.setUsn(usnText);
         CollectionReference response = dbpush.collection("Responses");
         response.document(usnText.toString()).set(responses).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
