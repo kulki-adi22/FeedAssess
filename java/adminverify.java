@@ -19,6 +19,7 @@ public class adminverify extends AppCompatActivity {
         setContentView(R.layout.activity_adminverify);
         b1 = findViewById(R.id.verifyBtn);
         pwd = findViewById(R.id.pwdText);
+
 //        password.findViewById(R.id.pwdText);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
