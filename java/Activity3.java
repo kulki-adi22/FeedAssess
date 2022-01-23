@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -102,7 +103,9 @@ public class Activity3 extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ques1.setHint("Enter question " + i[0]);
+//                String White="#fffffff";
+//                int whiteInt= Color.parseColor(White);
+                ques1.setHint("     Enter question " + i[0]);
                 quesList.add(ques1.getText().toString());
                 i[0]++;
                 ques1.setText("");
