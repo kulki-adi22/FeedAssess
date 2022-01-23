@@ -76,7 +76,7 @@ public class Activity2 extends AppCompatActivity {
         sub_list.add("Operating Systems");
         sub_list.add("Database Management System");
         sub_list.add("Computer Networks-2");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, sub_list);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,sub_list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjects.setAdapter(arrayAdapter);
         subjects.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
