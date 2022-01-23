@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -27,6 +28,7 @@ public class DisplayResponseNew extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView1);
         responsesArrayList = new ArrayList<Responses>();
         myAdapter = new MyAdapter(DisplayResponseNew.this,responsesArrayList);
+        recyclerView.setBackgroundColor(Color.parseColor("#060233"));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
