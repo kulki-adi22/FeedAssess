@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#060233"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:background="#de7e18"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="#060233"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USN: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/usnDisp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USN Displayed here"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject Displayed here"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#060233"
+            android:textStyle="bold"
+            android:text="Responses are as follows"
+            android:textSize="20sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q1: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispR1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="res1"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q2: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispR2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="res2"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q3: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispR3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="res3"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q4: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispR4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="res4"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q5: "
+                android:textSize="20sp"
+                android:textColor="#060233"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/dispR5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="res5"
+                android:textColor="#060233"
+                android:textStyle="bold"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="#060233"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
